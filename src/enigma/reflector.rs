@@ -23,4 +23,27 @@ impl Reflector {
 
         Reflector { mapping: map }
     }
+    pub fn reflect(&self, character: &str) -> &'static str {
+        for (char1, char2) in self.mapping.iter() {
+            if (character.eq(*char1)) {
+                return *char2;
+            } else if (character.eq(*char2)) {
+                return *char1;
+            }
+        }
+        panic!("aye, something is not being reflected")
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_reflection() {
+        let reflector = Reflector::reflector_b();
+        for i in 0..26 {
+            reflector.reflect(((i + 65) as u8 as char).to_string().as_str());
+        }
+    }
 }

@@ -1,3 +1,7 @@
+mod enigma;
+
+use enigma::rotor::Rotor;
 fn main() {
-    println!("Hello, Britain");
+    let num: u8 = "S".as_bytes()[0] - 65;
+    println!("{}", 'A' as usize);
 }

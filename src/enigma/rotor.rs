@@ -32,7 +32,7 @@ impl Rotor {
     }
     #[allow(dead_code)]
     #[allow(non_snake_case)]
-    fn new_rotor_III(offset: u8, starting_position: char) -> Rotor {
+    pub fn new_rotor_III(offset: u8, starting_position: char) -> Rotor {
         Rotor {
             output_map: "BDFHJLCPRTXVZNYEIWGAKMUSQO".chars().collect(),
             notch_pos: 21, //Notch at V
@@ -74,6 +74,7 @@ impl Rotor {
         //index - offset
         //permutate
         //answer + offset
+        //this is assuming a step of 0 or in other words, a starting position of Z
     }
 }
 

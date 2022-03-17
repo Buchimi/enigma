@@ -12,6 +12,13 @@ pub struct Rotor {
     offset: u8, //An offset of 0 = no ring shifting
 }
 impl Rotor {
+    #[allow(dead_code)]
+    pub fn set_offset_and_start_pos(&mut self, offset: u8, starting_position: char) {
+        self.offset = offset;
+        self.step = starting_position as u8 - 65;
+    }
+
+    #[allow(dead_code)]
     pub fn step(&mut self) -> &mut Rotor {
         self.step = (self.step + 1) % 26;
         self
@@ -21,13 +28,17 @@ impl Rotor {
         self.step
     }
 
+    #[allow(dead_code)]
+    pub fn get_notch_pos(&self) -> u8 {
+        self.notch_pos
+    }
     //These are standardized rotors
     #[allow(dead_code)]
     #[allow(non_snake_case)]
     pub fn new_rotor_I(offset: u8, starting_position: char) -> Rotor {
         Rotor {
             output_map: "EKMFLGDQVZNTOWYHXUSPAIBRCJ".chars().collect(), //map(|chr| chr.to_string()) //.collect(),
-            notch_pos: 16,                                              //notch at Q
+            notch_pos: 'R' as u8 - 65,
             step: starting_position as u8 - 65,
             offset: offset,
         }
@@ -37,7 +48,7 @@ impl Rotor {
     pub fn new_rotor_II(offset: u8, starting_position: char) -> Rotor {
         Rotor {
             output_map: "AJDKSIRUXBLHWTMCQGZNPYFVOE".chars().collect(),
-            notch_pos: 4, //Notch at E
+            notch_pos: 'F' as u8 - 65,
             step: starting_position as u8 - 65,
             offset: offset,
         }
@@ -47,7 +58,7 @@ impl Rotor {
     pub fn new_rotor_III(offset: u8, starting_position: char) -> Rotor {
         Rotor {
             output_map: "BDFHJLCPRTXVZNYEIWGAKMUSQO".chars().collect(),
-            notch_pos: 21, //Notch at V
+            notch_pos: 'W' as u8 - 65,
             step: starting_position as u8 - 65,
             offset: offset,
         }

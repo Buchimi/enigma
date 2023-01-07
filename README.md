@@ -26,6 +26,8 @@ result <- | swap | encrypt | encrypt | encrypt | <- reflected char
 
 and every character fed into this pipeline would go through different settings in the "encrypt" stages. This change of setting is called a rotor step
 
+It is also important to know that you get the same letter if you "encrypt" the encrypted string with the same setting
+
 ## My reasons
 - It wanted to challenge myself as i had to research and implement the engima machine with zero background knowledge before spring break ended (spoiler, I did it in 2-3 days 😎)
 - It's a somewhat unique project
@@ -60,42 +62,18 @@ Here is an example of how to use the Enigma machine to encrypt a message:
 use enigma_machine::{Enigma, RotorPositions, Plugboard};
 
 let message = "HELLO WORLD";
-let rotor_positions = RotorPositions {
-    left: 'A',
-    middle: 'A',
-    right: 'A',
-};
-let plugboard = Plugboard::default();
 
-let enigma = Enigma::default();
-let encrypted = enigma.encrypt(message, rotor_positions, plugboard);
+let enigma = Enigma::generic_enigma();
+let encrypted = enigma.encrypt_string(message.to_string());
 
 println!("Encrypted message: {}", encrypted);
 ```
-To decrypt a message, use the decrypt method instead of encrypt.
-
-# Modularity
-
-The Enigma machine is implemented as a series of modular components, each one responsible for a specific task. This allows you to use only the components that you need, and easily swap them out for custom implementations.
-
-For example, you can use a custom rotor implementation by providing it as a parameter to the Enigma struct:
+To decrypt a message, reset the enigma by calling 
 ```rust
-use enigma_machine::{Enigma, Rotor};
-
-struct MyRotor {
-    // ...
-}
-
-impl Rotor for MyRotor {
-    // ...
-}
-
-let enigma = Enigma {
-    left_rotor: Box::new(MyRotor::new()),
-    middle_rotor: Box::new(MyRotor::new()),
-    right_rotor: Box::new(MyRotor::new()),
-    // ...
-};
+let new_enigma = enigma.reset()
 ```
+and passing in the encrypted messase using the same encrypt string function.
+
+
 
 ## Thanks for taking a look at my github.

@@ -77,3 +77,4 @@ and passing in the encrypted messase using the same encrypt string function.
 
 
 ## Thanks for taking a look at my github.
+<b> And have a wonderful day </b>
